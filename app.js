@@ -1,12 +1,14 @@
 const express = require('express');
 const app = express();
-const port = 3000;
+const bodyParser = require('body-parser');
+const port = process.env.PORT || 3000;
 
 const setProfile = require('./src/setProfile');
 const getTasks = require('./src/getTasks');
 const status = require('./src/status'); 
 
-
+app.set('port', port);
+app.use(bodyParser.json());
 app.get('/set_emoji_status', (req, res) => {
   getTasks().then(({ data }) => {
     setProfile(status.currentEmojiStatus(data.length)).then(d => {
@@ -22,6 +24,11 @@ app.get('/set_emoji_status', (req, res) => {
   res.json({ message: 'set status' });
 });
 
-app.listen(port, () => {
-  console.log(`emoji status app listening at http://localhost:${port}`);
+app.post('/set_emoji_status', (req, res) => {
+  console.log(res.body)
+  res.json({ hoge: 'ok'})
+});
+
+app.listen(app.get('port'),() => { 
+  console.log(`emoji status app is running at localhost:${app.get('port')}`); 
 });
