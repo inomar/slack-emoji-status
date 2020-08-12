@@ -3,7 +3,7 @@ const Axios = require('axios');
 const TOKEN = process.env.SLACK_TOKEN;
 
 const setProfile = ({ status_text, status_emoji }) => {
-  Axios({
+  return Axios({
     url: 'https://slack.com/api/users.profile.set',
     method: 'POST',
     headers: {
@@ -14,14 +14,8 @@ const setProfile = ({ status_text, status_emoji }) => {
       profile: {
         status_text,
         status_emoji,
-      }
-    }
-  })
-  .then(({ data }) => {
-    console.log(data)
-  })
-  .catch(error => {
-    console.log(error)
+      },
+    },
   });
 };
 
