@@ -9,6 +9,10 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "dev": "nodemon app.js", 
     "start": "node app.js"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
   }
 }
